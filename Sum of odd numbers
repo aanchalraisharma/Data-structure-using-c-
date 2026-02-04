@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int sum_odd(int n) {
+    int sum = 0;
+    for (int i = 1; i <= n; i++) {
+        if (i % 2 != 0) {
+            sum += i;
+        }
+    }
+    return sum;
+}
+
+int main() {
+    int n;
+
+    cout << "Enter limit: ";
+    cin >> n;
+
+    cout << "Sum of odd numbers = " << sum_odd(n);
+
+    return 0;
+}
