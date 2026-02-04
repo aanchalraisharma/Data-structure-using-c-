@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+void selection_sort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int min = i;
+
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[min]) {
+                min = j;
+            }
+        }
+
+        if (i != min) {
+            swap(arr[i], arr[min]);
+        }
+    }
+}
+
+int main() {
+    int a[100], n;
+
+    cout << "Enter array size: ";
+    cin >> n;
+
+    cout << "Enter elements:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+
+    selection_sort(a, n);
+
+    cout << "Sorted array:\n";
+    for (int i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+
+    return 0;
+}
