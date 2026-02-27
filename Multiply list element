@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+int main() {
+    Node* head = NULL;
+    Node* temp = NULL;
+
+    int n, value;
+    cout << "Enter number of elements: ";
+    cin >> n;
+
+    // Create original list
+    for(int i = 0; i < n; i++) {
+        cin >> value;
+        Node* newNode = new Node();
+        newNode->data = value;
+        newNode->next = NULL;
+
+        if(head == NULL) {
+            head = newNode;
+            temp = newNode;
+        } else {
+            temp->next = newNode;
+            temp = newNode;
+        }
+    }
+
+    // Create new list with elements multiplied by 2
+    Node* newHead = NULL;
+    Node* newTemp = NULL;
+    Node* current = head;
+
+    while(current != NULL) {
+        Node* newNode = new Node();
+        newNode->data = current->data * 2;
+        newNode->next = NULL;
+
+        if(newHead == NULL) {
+            newHead = newNode;
+            newTemp = newNode;
+        } else {
+            newTemp->next = newNode;
+            newTemp = newNode;
+        }
+
+        current = current->next;
+    }
+
+    // Display new list
+    cout << "New List: ";
+    current = newHead;
+    while(current != NULL) {
+        cout << current->data << " ";
+        current = current->next;
+    }
+
+    return 0;
+}
