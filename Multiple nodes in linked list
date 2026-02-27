@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+int main() {
+    Node* head = nullptr;
+    Node* temp = nullptr;
+    Node* newNode = nullptr;
+
+    int n, value, i = 1;
+
+    cout << "Enter number of nodes: ";
+    cin >> n;
+
+    while (i <= n) {
+        cout << "Enter value: ";
+        cin >> value;
+
+        newNode = new Node();
+        newNode->data = value;
+        newNode->next = nullptr;
+
+        if (head == nullptr) {
+            head = newNode;
+            temp = newNode;
+        } else {
+            temp->next = newNode;
+            temp = newNode;
+        }
+
+        i++;
+    }
+
+    temp = head;
+    cout << "Linked List: ";
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+
+    return 0;
+}
