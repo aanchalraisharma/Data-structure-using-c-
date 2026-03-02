@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void insertAnywhere(Node*& head, int value, int pos) {
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (head == NULL || pos == 1) {
+        newNode->next = head;
+        head = newNode;
+        return;
+    }
+
+    Node* temp = head;
+    int count = 1;
+
+    while (temp->next != NULL && count < pos - 1) {
+        temp = temp->next;
+        count++;
+    }
+
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+void display(Node* head) {
+    while (head != NULL) {
+        cout << head->data << " ";
+        head = head->next;
+    }
+}
+
+int main() {
+    Node* head = NULL;
+
+    insertAnywhere(head, 10, 1);
+    insertAnywhere(head, 20, 2);
+    insertAnywhere(head, 30, 3);
+    insertAnywhere(head, 25, 2);
+
+    display(head);
+
+    return 0;
+}
