@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+class AccountManager;
+
+class BankAccount {
+private:
+    double balance;
+
+public:
+    BankAccount(double b) {
+        balance = b;
+    }
+
+    void display() {
+        cout << "Current Balance: " << balance << endl;
+    }
+
+    friend class AccountManager;
+};
+
+class AccountManager {
+public:
+    void deposit(BankAccount &acc, double amount) {
+        if (amount > 0)
+            acc.balance += amount;
+    }
+
+    void withdraw(BankAccount &acc, double amount) {
+        if (amount > 0 && amount <= acc.balance)
+            acc.balance -= amount;
+        else
+            cout << "Insufficient balance or invalid amount\n";
+    }
+};
+
+int main() {
+    BankAccount account(1000);
+    AccountManager manager;
+
+    account.display();
+
+    manager.deposit(account, 500);
+    account.display();
+
+    manager.withdraw(account, 300);
+    account.display();
+
+    manager.withdraw(account, 2000);
+
+    return 0;
+}
