@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void insert(Node*& head, int value) {
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (head == NULL)
+        head = newNode;
+    else {
+        Node* temp = head;
+        while (temp->next != NULL)
+            temp = temp->next;
+        temp->next = newNode;
+    }
+}
+
+float findAverage(Node* head) {
+    if (head == NULL)
+        return 0;
+
+    Node *slow = head, *fast = head;
+    Node *last = head;
+
+    while (last->next != NULL)
+        last = last->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    float avg = (head->data + slow->data + last->data) / 3.0;
+    return avg;
+}
+
+int main() {
+    Node* head = NULL;
+
+    insert(head, 10);
+    insert(head, 20);
+    insert(head, 30);
+    insert(head, 40);
+    insert(head, 50);
+
+    cout << findAverage(head);
+
+    return 0;
+}
