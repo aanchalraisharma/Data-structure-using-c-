@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void insert(Node*& head, int value) {
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (head == NULL)
+        head = newNode;
+    else {
+        Node* temp = head;
+        while (temp->next != NULL)
+            temp = temp->next;
+        temp->next = newNode;
+    }
+}
+
+Node* reverseUptoKey(Node* head, int key) {
+    Node *prev = NULL, *curr = head, *next = NULL;
+
+    while (curr != NULL && curr->data != key) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    if (curr == NULL) {
+        cout << "Key not found";
+        return head;
+    }
+
+    next = curr->next;
+    curr->next = prev;
+    head->next = next;
+
+    return curr;
+}
+
+void display(Node* head) {
+    while (head != NULL) {
+        cout << head->data << " ";
+        head = head->next;
+    }
+}
+
+int main() {
+    Node* head = NULL;
+
+    insert(head, 1);
+    insert(head, 2);
+    insert(head, 3);
+    insert(head, 4);
+    insert(head, 5);
+
+    head = reverseUptoKey(head, 3);
+
+    display(head);
+
+    return 0;
+}
