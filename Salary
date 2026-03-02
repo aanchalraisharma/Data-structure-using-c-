@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+
+class Employee {
+protected:
+    string name;
+    double basicSalary;
+
+public:
+    void setEmployee(string n, double salary) {
+        name = n;
+        basicSalary = salary;
+    }
+
+    virtual double calculateSalary() {
+        return basicSalary;
+    }
+
+    void display() {
+        cout << "Name: " << name << endl;
+        cout << "Total Salary: " << calculateSalary() << endl;
+    }
+};
+
+class Manager : public Employee {
+protected:
+    double allowance;
+
+public:
+    void setManager(string n, double salary, double a) {
+        name = n;
+        basicSalary = salary;
+        allowance = a;
+    }
+
+    double calculateSalary() override {
+        return basicSalary + allowance;
+    }
+};
+
+int main() {
+    Manager m;
+    m.setManager("Rahul", 50000, 10000);
+    m.display();
+
+    return 0;
+}
