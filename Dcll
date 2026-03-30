@@ -1,0 +1,99 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node* prev;
+};
+
+Node* insertAtEnd(Node* head, int value) {
+    Node* newNode = new Node{value, NULL, NULL};
+
+    if (head == NULL) {
+        newNode->next = newNode;
+        newNode->prev = newNode;
+        return newNode;
+    }
+
+    Node* last = head->prev;
+
+    last->next = newNode;
+    newNode->prev = last;
+
+    newNode->next = head;
+    head->prev = newNode;
+
+    return head;
+}
+
+Node* insertAtBeginning(Node* head, int value) {
+    Node* newNode = new Node{value, NULL, NULL};
+
+    if (head == NULL) {
+        newNode->next = newNode;
+        newNode->prev = newNode;
+        return newNode;
+    }
+
+    Node* last = head->prev;
+
+    newNode->next = head;
+    newNode->prev = last;
+
+    last->next = newNode;
+    head->prev = newNode;
+
+    return newNode;
+}
+
+Node* deleteAtBeginning(Node* head) {
+    if (head == NULL) return NULL;
+
+    if (head->next == head) {
+        delete head;
+        return NULL;
+    }
+
+    Node* last = head->prev;
+    Node* temp = head;
+
+    head = head->next;
+
+    head->prev = last;
+    last->next = head;
+
+    delete temp;
+    return head;
+}
+
+void display(Node* head) {
+    if (head == NULL) return;
+
+    Node* temp = head;
+
+    do {
+        cout << temp->data << " <-> ";
+        temp = temp->next;
+    } while (temp != head);
+
+    cout << "(back to head)" << endl;
+}
+
+int main() {
+    Node* head = NULL;
+
+    head = insertAtEnd(head, 10);
+    head = insertAtEnd(head, 20);
+    head = insertAtEnd(head, 30);
+
+    display(head);
+
+    head = insertAtBeginning(head, 5);
+    display(head);
+
+    head = deleteAtBeginning(head);
+    display(head);
+
+    return 0;
+}
