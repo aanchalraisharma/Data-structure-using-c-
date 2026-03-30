@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node* prev;
+};
+
+Node* insertAtBeginning(Node* head, int value) {
+    Node* newNode = new Node{value, NULL, NULL};
+
+    if (head != NULL) {
+        newNode->next = head;
+        head->prev = newNode;
+    }
+
+    return newNode;
+}
+
+void display(Node* head) {
+    Node* temp = head;
+
+    while (temp != NULL) {
+        cout << temp->data << " <-> ";
+        temp = temp->next;
+    }
+
+    cout << "NULL" << endl;
+}
+
+int main() {
+    Node* head = NULL;
+
+    head = insertAtBeginning(head, 10);
+    head = insertAtBeginning(head, 20);
+    head = insertAtBeginning(head, 30);
+
+    display(head);
+
+    return 0;
+}
