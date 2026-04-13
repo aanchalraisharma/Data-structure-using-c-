@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+#define MAX 100
+
+class Queue {
+private:
+    int arr[MAX];
+    int front, rear;
+
+public:
+    Queue() {
+        front = 0;
+        rear = -1;
+    }
+
+    void enqueue(int x) {
+        arr[++rear] = x;
+    }
+
+    int dequeue() {
+        return arr[front++];
+    }
+
+    bool isEmpty() {
+        return front > rear;
+    }
+};
+
+int main() {
+    int num, temp, digit, rev = 0;
+
+    cout << "Enter a number: ";
+    cin >> num;
+
+    temp = num;
+    Queue q;
+
+    while (temp > 0) {
+        digit = temp % 10;
+        q.enqueue(digit);
+        temp /= 10;
+    }
+
+    temp = num;
+
+    while (!q.isEmpty()) {
+        rev = rev * 10 + q.dequeue();
+    }
+
+    if (num == rev)
+        cout << "Palindrome";
+    else
+        cout << "Not Palindrome";
+
+    return 0;
+}
