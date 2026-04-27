@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+Node* create(int val) {
+    Node* n = new Node();
+    n->data = val;
+    n->left = n->right = NULL;
+    return n;
+}
+
+void postorder(Node* root) {
+    if (root == NULL) return;
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
+}
+
+int main() {
+    Node* root = create(1);
+    root->left = create(2);
+    root->right = create(3);
+    postorder(root);
+}
